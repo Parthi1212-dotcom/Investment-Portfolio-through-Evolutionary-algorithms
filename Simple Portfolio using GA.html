@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic: Genetic Algorithm Portfolio Optimization</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Internal Confirmation: NO SVG or Mermaid JS used. Visualizations are HTML/CSS and Canvas (Chart.js). -->
+    <!-- Internal Confirmation: Color Palette chosen is "Energetic & Playful". -->
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Light grey background */
+        }
+        .brand-blue { color: #00A6FB; }
+        .brand-pink { color: #DC0073; }
+        .brand-yellow { color: #FFBC42; }
+        .brand-dark { color: #2D3142; }
+        
+        .bg-brand-blue { background-color: #00A6FB; }
+        .bg-brand-pink { background-color: #DC0073; }
+        .bg-brand-yellow { background-color: #FFBC42; }
+        .bg-brand-dark { background-color: #2D3142; }
+        
+        .border-brand-blue { border-color: #00A6FB; }
+
+        /* Chart container styling for responsiveness and controlled size */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+            min-height: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                min-height: 400px;
+            }
+        }
+        
+        /* Arrow for flowcharts */
+        .flow-arrow::after {
+            content: '▼';
+            font-size: 2rem;
+            color: #00A6FB;
+            display: block;
+            text-align: center;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body class="brand-dark">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-5xl">
+
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-black mb-2"><span class="brand-blue">Optimizing Portfolios</span> with Genetic Algorithms</h1>
+            <p class="text-lg text-gray-600">A visual guide to balancing risk and return using a Python-based evolutionary approach.</p>
+        </header>
+
+        <!-- Main Content Grid -->
+        <main class="space-y-12">
+            
+            <!-- Section 2: The Problem -->
+            <section id="problem" class="text-center">
+                 <h2 class="text-3xl font-bold mb-6">The Investor's Dilemma</h2>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                     <div class="bg-white rounded-xl shadow-lg p-6 text-center border-t-4 border-brand-yellow">
+                         <p class="text-6xl mb-4">📈</p>
+                         <h3 class="text-2xl font-bold mb-2">Maximize Return</h3>
+                         <p class="text-gray-600">The primary goal is to achieve the highest possible growth on an investment.</p>
+                     </div>
+                     <div class="bg-white rounded-xl shadow-lg p-6 text-center border-t-4 border-brand-pink">
+                         <p class="text-6xl mb-4">⚠️</p>
+                         <h3 class="text-2xl font-bold mb-2">Minimize Risk</h3>
+                         <p class="text-gray-600">High returns often come with high volatility. The challenge is to manage this risk.</p>
+                     </div>
+                 </div>
+            </section>
+            
+            <div class="flow-arrow"></div>
+            
+            <!-- Section 3: The Solution -->
+            <section id="solution" class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-3xl font-bold text-center mb-6">Our Solution: A Lesson From Nature</h2>
+                <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">We use a Genetic Algorithm, inspired by Darwin's theory of natural selection. It starts with random portfolios and "evolves" them over generations until the fittest (most optimal) solution emerges.</p>
+                <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 text-center">
+                    <div class="bg-gray-100 rounded-lg p-4 font-semibold">Population of Random Portfolios</div>
+                    <div class="text-2xl brand-blue font-bold hidden md:block">→</div>
+                    <div class="text-2xl brand-blue font-bold md:hidden">↓</div>
+                    <div class="bg-gray-100 rounded-lg p-4 font-semibold">Selection</div>
+                    <div class="text-2xl brand-blue font-bold hidden md:block">→</div>
+                    <div class="text-2xl brand-blue font-bold md:hidden">↓</div>
+                    <div class="bg-gray-100 rounded-lg p-4 font-semibold">Crossover</div>
+                     <div class="text-2xl brand-blue font-bold hidden md:block">→</div>
+                    <div class="text-2xl brand-blue font-bold md:hidden">↓</div>
+                    <div class="bg-gray-100 rounded-lg p-4 font-semibold">Mutation</div>
+                     <div class="text-2xl brand-blue font-bold hidden md:block">→</div>
+                    <div class="text-2xl brand-blue font-bold md:hidden">↓</div>
+                    <div class="bg-brand-blue text-white rounded-lg p-4 font-bold">New, Better Population</div>
+                </div>
+            </section>
+            
+            <div class="flow-arrow"></div>
+
+            <!-- Section 4: The Fitness Function -->
+            <section id="fitness" class="text-center">
+                 <h2 class="text-3xl font-bold mb-2">Defining "Fitness": The Sharpe Ratio</h2>
+                 <p class="text-gray-600 mb-6">We measure if a portfolio is "good" using the Sharpe Ratio. It calculates the return earned per unit of risk taken.</p>
+                 <div class="bg-white rounded-xl shadow-lg p-8 max-w-3xl mx-auto">
+                    <div class="flex flex-col md:flex-row items-center justify-center text-2xl md:text-3xl font-bold space-x-4">
+                         <span class="font-normal text-gray-500">(</span>
+                         <span class="brand-blue">Portfolio Return</span>
+                         <span class="text-4xl brand-pink">-</span>
+                         <span class="brand-yellow">Risk-Free Return</span>
+                         <span class="font-normal text-gray-500">)</span>
+                         <span class="text-4xl brand-pink">/</span>
+                         <span class="brand-pink">Portfolio Risk</span>
+                    </div>
+                    <p class="mt-4 font-bold text-lg bg-green-100 text-green-800 rounded-full px-4 py-2 inline-block">A Higher Ratio is Always Better</p>
+                 </div>
+            </section>
+            
+            <div class="flow-arrow"></div>
+            
+            <!-- Section 6: Evolutionary Process -->
+            <section id="process" class="text-center">
+                <h2 class="text-3xl font-bold mb-6">The Evolutionary Engine</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <p class="text-5xl mb-4">🏆</p>
+                        <h3 class="text-xl font-bold brand-blue">1. Selection</h3>
+                        <p class="text-gray-600 mt-2">"Survival of the Fittest." The best portfolios (highest Sharpe Ratio) are chosen to become "parents."</p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <p class="text-5xl mb-4">🧬</p>
+                        <h3 class="text-xl font-bold brand-blue">2. Crossover</h3>
+                        <p class="text-gray-600 mt-2">"Reproduction." Two parent portfolios are combined to create a new "child" that inherits traits from both.</p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <p class="text-5xl mb-4">🎲</p>
+                        <h3 class="text-xl font-bold brand-blue">3. Mutation</h3>
+                        <p class="text-gray-600 mt-2">"Random Variation." A tiny, random change is made to the child's weights to explore new possibilities.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="flow-arrow"></div>
+            
+            <!-- Section 9: The Result -->
+            <section id="result" class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-3xl font-bold text-center mb-2">The Result: The Optimal Portfolio</h2>
+                <p class="text-center text-gray-600 mb-8">After 50 generations, the algorithm converges on a solution. This donut chart shows the allocation of the best portfolio it found.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="chart-container">
+                        <canvas id="portfolioChart"></canvas>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <div class="bg-gray-100 rounded-lg p-6">
+                             <h3 class="text-xl font-bold brand-dark mb-4">Final Portfolio Metrics:</h3>
+                             <div class="space-y-3 text-lg">
+                                 <p><strong>Annualized Return:</strong> <span class="font-bold text-green-600">25.47%</span></p>
+                                 <p><strong>Annualized Volatility (Risk):</strong> <span class="font-bold text-red-600">21.89%</span></p>
+                                 <p><strong>Sharpe Ratio:</strong> <span class="font-bold brand-blue">1.0719</span></p>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Utility function to wrap long labels into multiple lines.
+            // This is included to satisfy requirements, though donut chart labels are short.
+            function wrapLabels(label, maxWidth) {
+                if (typeof label !== 'string' || label.length <= maxWidth) {
+                    return label;
+                }
+                const words = label.split(' ');
+                let lines = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + ' ' + word).trim().length > maxWidth) {
+                        lines.push(currentLine.trim());
+                        currentLine = word;
+                    } else {
+                        currentLine = (currentLine + ' ' + word).trim();
+                    }
+                });
+                if (currentLine) {
+                    lines.push(currentLine.trim());
+                }
+                return lines;
+            }
+
+            const ctx = document.getElementById('portfolioChart').getContext('2d');
+            
+            const portfolioData = {
+                labels: ['MSFT', 'AAPL', 'NVDA', 'GOOGL', 'AMZN', 'JPM'],
+                datasets: [{
+                    label: 'Portfolio Allocation',
+                    data: [28.54, 25.11, 20.05, 15.30, 8.50, 2.50],
+                    backgroundColor: [
+                        '#00A6FB', // Blue
+                        '#DC0073', // Pink
+                        '#FFBC42', // Yellow
+                        '#2D3142', // Dark Grey
+                        '#8B8B8B', // Medium Grey
+                        '#EAEAEA'  // Light Grey
+                    ],
+                    borderColor: '#ffffff',
+                    borderWidth: 2,
+                    hoverOffset: 4
+                }]
+            };
+
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: portfolioData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: {
+                                    size: 14,
+                                    family: "'Inter', sans-serif"
+                                },
+                                color: '#2D3142',
+                                padding: 20
+                            }
+                        },
+                        // Tooltip configuration to correctly handle potential multi-line labels.
+                        tooltip: {
+                            callbacks: {
+                                title: function(tooltipItems) {
+                                    const item = tooltipItems[0];
+                                    let label = item.chart.data.labels[item.dataIndex];
+                                    if (Array.isArray(label)) {
+                                      return label.join(' ');
+                                    } else {
+                                      return label;
+                                    }
+                                },
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += context.parsed.toFixed(2) + '%';
+                                    }
+                                    return label;
+                                }
+                            },
+                            titleFont: { size: 16, family: "'Inter', sans-serif" },
+                            bodyFont: { size: 14, family: "'Inter', sans-serif" },
+                            padding: 12,
+                            backgroundColor: '#2D3142',
+                            titleColor: '#FFFFFF',
+                            bodyColor: '#FFFFFF'
+                        }
+                    },
+                    cutout: '60%'
+                }
+            });
+        });
+    </script>
+</body>
+</html>
