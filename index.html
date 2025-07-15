@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Optimizer | Professional Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Global Styles & Variables --- */
+        :root {
+            --bg-color: #f4f5f7;
+            --panel-bg-color: #ffffff;
+            --border-color: #e0e0e0;
+            --text-primary: #262626;
+            --text-secondary: #5f6368;
+            --yahoo-blue: #4c00ff;
+            --yahoo-blue-hover: #4100d4;
+            --font-family: 'Roboto', sans-serif;
+            --shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+
+        /* --- Base Setup --- */
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-family);
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* --- Page Header --- */
+        .page-header {
+            background-color: var(--panel-bg-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 10px 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container .logo-text {
+            font-weight: 700;
+            font-size: 22px;
+            color: var(--yahoo-blue);
+            text-decoration: none;
+        }
+
+        .search-bar {
+            flex-grow: 1;
+        }
+
+        .search-bar input {
+            width: 100%;
+            max-width: 450px;
+            padding: 10px 15px;
+            border: 1px solid #dcdcdc;
+            border-radius: 20px;
+            font-size: 15px;
+            background-color: #f0f2f5;
+        }
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--yahoo-blue);
+            background-color: var(--panel-bg-color);
+        }
+
+        .user-nav a, .user-nav button {
+            text-decoration: none;
+            color: var(--text-primary);
+            margin-left: 20px;
+            font-weight: 500;
+            font-size: 15px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-family);
+        }
+
+        .user-nav .nav-button {
+            background-color: var(--yahoo-blue);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 20px;
+            transition: background-color 0.2s ease;
+        }
+        .user-nav .nav-button:hover {
+            background-color: var(--yahoo-blue-hover);
+        }
+
+        /* --- Main Content Area --- */
+        .content-area {
+            padding: 25px 30px;
+        }
+
+        .page-title {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 25px;
+            align-items: start;
+            margin-bottom: 25px;
+        }
+
+        .panel {
+            background-color: var(--panel-bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        /* --- Controls Panel (Left) --- */
+        .controls-panel {
+            padding: 20px;
+        }
+        
+        .controls-panel h2 {
+            font-size: 18px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+        
+        .control-group label {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .control-group input[type="text"],
+        .control-group input[type="email"],
+        .control-group input[type="password"],
+        .control-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+            background-color: white;
+        }
+        
+        .control-group input[type="text"]:focus,
+        .control-group input[type="email"]:focus,
+        .control-group input[type="password"]:focus,
+        .control-group select:focus {
+            outline: none;
+            border-color: var(--yahoo-blue);
+        }
+
+        .control-group .description {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            margin-bottom: 0;
+        }
+
+        .data-source-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            background-color: var(--bg-color);
+            border-radius: 5px;
+            padding: 5px;
+        }
+        .data-source-selector label {
+            flex: 1;
+            padding: 8px;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .data-source-selector input[type="radio"] {
+            display: none;
+        }
+        .data-source-selector input[type="radio"]:checked + label {
+            background-color: var(--yahoo-blue);
+            color: white;
+            font-weight: 500;
+        }
+
+        input[type="file"] {
+            border: 2px dashed var(--border-color);
+            border-radius: 5px;
+            padding: 20px;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+        input[type="file"]::file-selector-button {
+            display: none;
+        }
+
+
+        #optimizeBtn {
+            width: 100%;
+            background-color: var(--yahoo-blue);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: background-color 0.2s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #optimizeBtn:hover {
+            background-color: var(--yahoo-blue-hover);
+        }
+        
+        /* Loader for the button */
+        .loader {
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        .hidden { display: none; }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* --- Results Panel (Right) --- */
+        .results-panel {
+            min-height: 500px;
+        }
+        
+        .results-panel .panel-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .results-panel .panel-header h2 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .results-content {
+            padding: 20px;
+        }
+
+        #metrics-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .metric-card {
+            background-color: var(--bg-color);
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+        .metric-card .label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        .metric-card .value {
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 350px;
+            margin-bottom: 30px;
+        }
+        
+        #chart-placeholder, #backtest-chart-placeholder {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            color: var(--text-secondary);
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        #results-output h3 {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        #allocation-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 15px;
+        }
+        
+        .allocation-card {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .allocation-card .ticker {
+            font-weight: 700;
+            font-size: 18px;
+        }
+        
+        .allocation-card .weight {
+            font-size: 22px;
+            font-weight: 500;
+            color: var(--yahoo-blue);
+            margin-top: 5px;
+        }
+        
+        .message {
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 15px;
+            text-align: center;
+        }
+        .message.error {
+            background-color: #ffdddd;
+            color: #d8000c;
+        }
+        .message.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        /* --- News & Backtest Panels --- */
+        .news-panel, .backtest-panel {
+            padding: 20px;
+            margin-top: 25px;
+        }
+        .news-panel h2, .backtest-panel h2 {
+            font-size: 18px;
+            margin-top: 0;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        #news-feed-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .news-article-card {
+            background-color: #fdfdfd;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+        .news-article-card:hover {
+            border-color: #c0c0c0;
+        }
+        .news-article-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .news-headline {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        .news-headline a {
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+        .news-headline a:hover {
+            color: var(--yahoo-blue);
+        }
+        .news-summary {
+            font-size: 14px;
+            color: var(--text-secondary);
+            flex-grow: 1;
+            margin-bottom: 15px;
+        }
+        .news-meta {
+            font-size: 12px;
+            color: #888;
+            border-top: 1px solid var(--border-color);
+            padding-top: 10px;
+        }
+
+        /* --- Auth Modals --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+        .modal-content h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .modal-content .control-group {
+            margin-bottom: 15px;
+        }
+        .modal-content button {
+             width: 100%;
+            background-color: var(--yahoo-blue);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        #auth-error {
+            color: #d8000c;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+
+        /* --- Responsive Design --- */
+        @media (max-width: 900px) {
+            .tool-grid {
+                grid-template-columns: 1fr;
+            }
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="page-header">
+        <div class="logo-container">
+            <a href="#" class="logo-text">FinanceTool</a>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search for symbols or companies (e.g., AAPL)">
+        </div>
+        <nav class="user-nav" id="user-nav">
+            <!-- This will be populated by JavaScript based on auth state -->
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="content-area">
+        <h1 class="page-title">Portfolio Optimization Dashboard</h1>
+        
+        <div class="tool-grid">
+            <!-- Left Panel: Controls -->
+            <div class="panel controls-panel">
+                <h2>Optimizer Settings</h2>
+                
+                <div class="control-group">
+                    <label>Data Source</label>
+                    <div class="data-source-selector">
+                        <input type="radio" id="source-api" name="dataSource" value="api" checked>
+                        <label for="source-api">Live API</label>
+                        <input type="radio" id="source-csv" name="dataSource" value="csv">
+                        <label for="source-csv">Upload CSV</label>
+                    </div>
+                </div>
+
+                <div id="api-input-group" class="control-group">
+                    <label for="tickers">Stock Tickers</label>
+                    <input type="text" id="tickers" placeholder="AAPL, GOOG, MSFT">
+                    <p class="description">Enter symbols separated by commas.</p>
+                </div>
+
+                <div id="csv-input-group" class="control-group hidden">
+                    <label for="csv-upload">Upload Price Data</label>
+                    <input type="file" id="csv-upload" accept=".csv">
+                    <p class="description">Supports wide (Date,T1,T2) and long (Date,Ticker,Price) formats. Missing data is auto-filled.</p>
+                </div>
+
+                <div class="control-group">
+                    <label for="optimization-goal">Optimization Goal</label>
+                    <select id="optimization-goal">
+                        <option value="maxSharpe">Max Sharpe Ratio</option>
+                        <option value="minVolatility">Min Volatility</option>
+                    </select>
+                </div>
+
+                <button id="optimizeBtn">
+                    <span class="btn-text">Optimize Portfolio</span>
+                    <div class="loader hidden"></div>
+                </button>
+                <div id="status-message"></div>
+            </div>
+
+            <!-- Right Panel: Chart & Results -->
+            <div class="panel results-panel">
+                <div class="panel-header">
+                    <h2>Efficient Frontier & Optimal Allocation</h2>
+                </div>
+                <div class="results-content">
+                    <div id="metrics-container">
+                        <!-- JS will populate this -->
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="efficientFrontierChart"></canvas>
+                        <div id="chart-placeholder" class="">
+                            <p>Chart will be displayed here after optimization.</p>
+                        </div>
+                    </div>
+                    <div id="results-output">
+                         <h3>Optimal Allocation</h3>
+                         <div id="allocation-container">
+                             <!-- JS will populate this with cards -->
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Backtesting Panel -->
+        <section class="panel backtest-panel">
+            <h2>Historical Performance (1-Year Backtest)</h2>
+            <div class="chart-container">
+                <canvas id="backtestChart"></canvas>
+                <div id="backtest-chart-placeholder">
+                    <p>Performance chart will appear here after optimization.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- News Section -->
+        <section class="panel news-panel">
+            <h2>Relevant Market News</h2>
+            <div id="news-feed-container">
+                <p class="placeholder">News related to your selected tickers will appear here.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Auth Modals -->
+    <div id="auth-modal-container"></div>
+
+    <!-- JavaScript libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { 
+            getAuth, 
+            onAuthStateChanged,
+            createUserWithEmailAndPassword,
+            signInWithEmailAndPassword,
+            signOut
+        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+        // --- IMPORTANT: CONFIGURE FIREBASE ---
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // --- DOM Element References ---
+        const userNav = document.getElementById('user-nav');
+        const authModalContainer = document.getElementById('auth-modal-container');
+        const optimizeBtn = document.getElementById('optimizeBtn');
+        const btnText = optimizeBtn.querySelector('.btn-text');
+        const loader = optimizeBtn.querySelector('.loader');
+        const tickersInput = document.getElementById('tickers');
+        const allocationContainer = document.getElementById('allocation-container');
+        const chartPlaceholder = document.getElementById('chart-placeholder');
+        const statusMessageContainer = document.getElementById('status-message');
+        const chartCanvas = document.getElementById('efficientFrontierChart');
+        const newsFeedContainer = document.getElementById('news-feed-container');
+        const apiInputGroup = document.getElementById('api-input-group');
+        const csvInputGroup = document.getElementById('csv-input-group');
+        const csvUploadInput = document.getElementById('csv-upload');
+        const metricsContainer = document.getElementById('metrics-container');
+        const optimizationGoalSelect = document.getElementById('optimization-goal');
+        const backtestChartCanvas = document.getElementById('backtestChart');
+        const backtestChartPlaceholder = document.getElementById('backtest-chart-placeholder');
+        let efficientFrontierChart = null;
+        let backtestChart = null;
+
+
+        // --- Auth State Management ---
+        onAuthStateChanged(auth, user => {
+            updateUIForAuthState(user);
+        });
+
+        function updateUIForAuthState(user) {
+            if (user) {
+                userNav.innerHTML = `<span>${user.email}</span><button id="sign-out-btn">Sign Out</button>`;
+                document.getElementById('sign-out-btn').addEventListener('click', handleSignOut);
+            } else {
+                userNav.innerHTML = `<button id="sign-in-btn">Sign In</button><button id="sign-up-btn" class="nav-button">Sign Up</button>`;
+                document.getElementById('sign-in-btn').addEventListener('click', () => showAuthModal('signin'));
+                document.getElementById('sign-up-btn').addEventListener('click', () => showAuthModal('signup'));
+            }
+        }
+
+        function showAuthModal(type) {
+            const title = type === 'signin' ? 'Sign In' : 'Sign Up';
+            const buttonText = type === 'signin' ? 'Sign In' : 'Sign Up';
+            const formId = type === 'signin' ? 'signin-form' : 'signup-form';
+            authModalContainer.innerHTML = `<div class="modal-overlay"><div class="modal-content"><button class="modal-close">&times;</button><h2>${title}</h2><form id="${formId}"><div class="control-group"><label for="auth-email">Email</label><input type="email" id="auth-email" required></div><div class="control-group"><label for="auth-password">Password</label><input type="password" id="auth-password" required></div><button type="submit">${buttonText}</button><div id="auth-error"></div></form></div></div>`;
+            authModalContainer.querySelector('.modal-close').addEventListener('click', () => { authModalContainer.innerHTML = ''; });
+            document.getElementById(formId).addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('auth-email').value;
+                const password = document.getElementById('auth-password').value;
+                const authErrorDiv = document.getElementById('auth-error');
+                authErrorDiv.textContent = '';
+                if (type === 'signin') {
+                    signInWithEmailAndPassword(auth, email, password).then(() => authModalContainer.innerHTML = '').catch(error => authErrorDiv.textContent = error.message);
+                } else {
+                    createUserWithEmailAndPassword(auth, email, password).then(() => authModalContainer.innerHTML = '').catch(error => authErrorDiv.textContent = error.message);
+                }
+            });
+        }
+
+        function handleSignOut() {
+            signOut(auth).catch(error => console.error('Sign out error', error));
+        }
+
+        // --- Main App Logic ---
+        optimizeBtn.addEventListener('click', handleOptimization);
+        document.querySelectorAll('input[name="dataSource"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                const isApi = e.target.value === 'api';
+                apiInputGroup.classList.toggle('hidden', !isApi);
+                csvInputGroup.classList.toggle('hidden', isApi);
+            });
+        });
+
+        async function handleOptimization() {
+            toggleLoading(true);
+            clearPreviousResults();
+            displayMessage('Processing...', 'success');
+            try {
+                const dataSource = document.querySelector('input[name="dataSource"]:checked').value;
+                const optimizationGoal = optimizationGoalSelect.value;
+                let stockData, tickers, benchmarkData;
+
+                if (dataSource === 'api') {
+                    tickers = tickersInput.value.split(',').map(t => t.trim().toUpperCase()).filter(t => t !== '');
+                    if (tickers.length < 2) throw new Error('Please enter at least two stock tickers.');
+                    
+                    displayMessage('Fetching live data...', 'success');
+                    const apiKey = 'EEFG40L0G300FW21';
+                    const tickersToFetch = [...tickers, 'SPY'];
+                    const allDataResults = await Promise.all(tickersToFetch.map(ticker => fetchData(ticker, apiKey)));
+                    
+                    const failedTicker = allDataResults.find(r => r.error);
+                    if (failedTicker) throw new Error(failedTicker.error);
+
+                    stockData = allDataResults.slice(0, tickers.length).map(r => r.data);
+                    benchmarkData = allDataResults[allDataResults.length - 1].data;
+
+                    const newsData = await fetchNews(tickers, apiKey);
+                    if (newsData && newsData.feed) displayNews(newsData.feed);
+
+                } else {
+                    const file = csvUploadInput.files[0];
+                    if (!file) throw new Error('Please select a CSV file to upload.');
+                    
+                    displayMessage('Running data pipeline...', 'success');
+                    const csvText = await file.text();
+                    const processedData = await runDataPipeline(csvText);
+                    stockData = processedData.stockData;
+                    tickers = processedData.tickers;
+                    newsFeedContainer.innerHTML = '<p>News & Backtesting are not available for uploaded data.</p>';
+                }
+
+                displayMessage('Calculating returns and risk...', 'success');
+                const { alignedPrices, dates } = alignData(stockData);
+                
+                if (dates.length < 30) {
+                    throw new Error(`Insufficient overlapping data. Analysis requires at least 30 common trading days, but only ${dates.length} were found.`);
+                }
+
+                const dailyReturns = calculateDailyReturns(alignedPrices);
+                const meanReturns = calculateMeanReturns(dailyReturns);
+                const covMatrix = calculateCovarianceMatrix(dailyReturns);
+
+                displayMessage('Running Monte Carlo simulation...', 'success');
+                const simulationResults = runMonteCarloSimulation(meanReturns, covMatrix, tickers.length);
+                const optimalPortfolio = findOptimalPortfolio(simulationResults, optimizationGoal);
+
+                if (!optimalPortfolio) {
+                    throw new Error("Could not determine an optimal portfolio. The input data may have insufficient history or contain errors.");
+                }
+
+                displayMetrics(optimalPortfolio);
+                displayResults(optimalPortfolio, tickers);
+                displayChart(simulationResults, optimalPortfolio, optimizationGoal);
+                
+                if(benchmarkData) {
+                    displayMessage('Running backtest...', 'success');
+                    const backtestResults = runBacktest(alignedPrices, dates, optimalPortfolio.weights, benchmarkData);
+                    displayBacktestChart(backtestResults);
+                }
+
+                displayMessage('Optimization complete!', 'success');
+
+            } catch (error) {
+                console.error('Optimization Error:', error);
+                displayMessage(error.message, 'error');
+            } finally {
+                toggleLoading(false);
+            }
+        }
+
+        /**
+         * The main data processing pipeline for uploaded CSVs.
+         */
+        function runDataPipeline(csvText) {
+            return new Promise((resolve, reject) => {
+                try {
+                    const lines = csvText.trim().split(/\r?\n/);
+                    if (lines.length < 2) throw new Error("CSV file must have a header and at least one row of data.");
+                    const headers = lines[0].split(',').map(h => h.trim().toUpperCase());
+                    
+                    let parsedData;
+                    if (headers.includes('TICKER') && headers.includes('PRICE')) {
+                        displayMessage('Long format detected. Pivoting data...', 'success');
+                        parsedData = parseAndPivotLongCSV(lines);
+                    } else {
+                        displayMessage('Wide format detected. Parsing data...', 'success');
+                        parsedData = parseWideCSV(lines);
+                    }
+
+                    displayMessage('Cleaning missing data...', 'success');
+                    const cleanedData = cleanAndValidateData(parsedData.stockData);
+                    
+                    resolve({ stockData: cleanedData, tickers: parsedData.tickers });
+
+                } catch (e) {
+                    reject(e);
+                }
+            });
+        }
+
+        function parseWideCSV(lines) {
+            const headers = lines[0].split(',').map(h => h.trim());
+            const tickers = headers.slice(1);
+            const dataByTicker = tickers.map(() => ({}));
+            for (let i = 1; i < lines.length; i++) {
+                const values = lines[i].split(',');
+                const date = values[0].trim();
+                for (let j = 1; j < values.length; j++) {
+                    const tickerIndex = j - 1;
+                    dataByTicker[tickerIndex][date] = { '5. adjusted close': values[j].trim() };
+                }
+            }
+            return { stockData: dataByTicker, tickers };
+        }
+
+        function parseAndPivotLongCSV(lines) {
+            const dataMap = new Map();
+            const tickers = new Set();
+            const headers = lines[0].split(',').map(h => h.trim().toUpperCase());
+            const dateIndex = headers.indexOf('DATE');
+            const tickerIndex = headers.indexOf('TICKER');
+            const priceIndex = headers.indexOf('PRICE');
+
+            if (dateIndex === -1 || tickerIndex === -1 || priceIndex === -1) {
+                throw new Error('Invalid long format. Header must contain DATE, TICKER, and PRICE.');
+            }
+
+            for (let i = 1; i < lines.length; i++) {
+                const values = lines[i].split(',');
+                const date = values[dateIndex].trim();
+                const ticker = values[tickerIndex].trim().toUpperCase();
+                const price = values[priceIndex].trim();
+                
+                tickers.add(ticker);
+                if (!dataMap.has(ticker)) {
+                    dataMap.set(ticker, {});
+                }
+                dataMap.get(ticker)[date] = { '5. adjusted close': price };
+            }
+
+            const tickerList = Array.from(tickers);
+            const stockData = tickerList.map(ticker => dataMap.get(ticker));
+            
+            return { stockData, tickers: tickerList };
+        }
+
+        function cleanAndValidateData(stockData) {
+            const { alignedPrices, dates } = alignData(stockData);
+            for (let i = 0; i < alignedPrices.length; i++) {
+                for (let j = 1; j < alignedPrices[i].length; j++) {
+                    if (alignedPrices[i][j] === null || isNaN(alignedPrices[i][j])) {
+                        alignedPrices[i][j] = alignedPrices[i][j-1];
+                    }
+                }
+            }
+            const cleanedStockData = stockData.map((_, tickerIndex) => {
+                const tickerData = {};
+                dates.forEach((date, dateIndex) => {
+                    tickerData[date] = { '5. adjusted close': alignedPrices[tickerIndex][dateIndex] };
+                });
+                return tickerData;
+            });
+            return cleanedStockData;
+        }
+
+        function runBacktest(alignedPrices, dates, weights, benchmarkData) {
+            const portfolioValues = [];
+            const benchmarkValues = [];
+            let portfolioValue = 10000;
+            let benchmarkValue = 10000;
+            const alignedBenchmark = dates.map(date => benchmarkData[date] ? parseFloat(benchmarkData[date]['5. adjusted close']) : null);
+            const portfolioReturns = [];
+            for(let i = 1; i < dates.length; i++) {
+                let dailyReturn = 0;
+                for(let j = 0; j < weights.length; j++) {
+                    if(alignedPrices[j][i-1] && alignedPrices[j][i]) {
+                        dailyReturn += (alignedPrices[j][i] / alignedPrices[j][i-1] - 1) * weights[j];
+                    }
+                }
+                portfolioReturns.push(dailyReturn);
+            }
+            const benchmarkReturns = [];
+            for(let i = 1; i < dates.length; i++) {
+                if(alignedBenchmark[i-1] && alignedBenchmark[i]) {
+                    benchmarkReturns.push(alignedBenchmark[i] / alignedBenchmark[i-1] - 1);
+                } else {
+                    benchmarkReturns.push(0);
+                }
+            }
+            for(let i = 0; i < portfolioReturns.length; i++) {
+                portfolioValue *= (1 + portfolioReturns[i]);
+                benchmarkValue *= (1 + benchmarkReturns[i]);
+                portfolioValues.push({x: new Date(dates[i+1]), y: portfolioValue});
+                benchmarkValues.push({x: new Date(dates[i+1]), y: benchmarkValue});
+            }
+            return { portfolio: portfolioValues, benchmark: benchmarkValues };
+        }
+        function displayBacktestChart({ portfolio, benchmark }) {
+            backtestChartPlaceholder.classList.add('hidden');
+            backtestChartCanvas.classList.remove('hidden');
+            const ctx = backtestChartCanvas.getContext('2d');
+            backtestChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    datasets: [{
+                        label: 'Your Optimal Portfolio',
+                        data: portfolio,
+                        borderColor: 'rgb(76, 0, 255)',
+                        backgroundColor: 'rgba(76, 0, 255, 0.1)',
+                        fill: true,
+                        pointRadius: 0,
+                    }, {
+                        label: 'S&P 500 (SPY)',
+                        data: benchmark,
+                        borderColor: 'rgb(255, 99, 132)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                        fill: true,
+                        pointRadius: 0,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { type: 'time', time: { unit: 'month' }, title: { display: true, text: 'Date' } },
+                        y: { title: { display: true, text: 'Portfolio Value ($)' }, ticks: { callback: value => '$' + value.toLocaleString() } }
+                    },
+                    plugins: { tooltip: { mode: 'index', intersect: false } }
+                }
+            });
+        }
+        async function fetchData(ticker, apiKey) {
+            const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${ticker}&apikey=${apiKey}&outputsize=full`;
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const data = await response.json();
+                console.log(`API Response for ${ticker}:`, data);
+                if (data['Error Message']) throw new Error(`Invalid ticker: ${ticker}.`);
+                if (data['Note']) throw new Error('API rate limit reached. Please wait and try again.');
+                if (!data['Time Series (Daily)']) throw new Error(`No 'Time Series (Daily)' data for ${ticker}.`);
+                return { data: data['Time Series (Daily)'] };
+            } catch (error) {
+                return { error: error.message };
+            }
+        }
+        async function fetchNews(tickers, apiKey) {
+            const url = `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=${tickers.join(',')}&apikey=${apiKey}&limit=10`;
+            try {
+                const response = await fetch(url);
+                if (!response.ok) return null;
+                const data = await response.json();
+                console.log('News API Response:', data);
+                return data;
+            } catch (error) {
+                console.error('Failed to fetch news:', error);
+                return null;
+            }
+        }
+        function displayNews(newsFeed) {
+            newsFeedContainer.innerHTML = '';
+            if (!newsFeed || newsFeed.length === 0) {
+                newsFeedContainer.innerHTML = '<p>No recent news found for the selected tickers.</p>';
+                return;
+            }
+            newsFeed.slice(0, 6).forEach(article => {
+                const card = document.createElement('div');
+                card.className = 'news-article-card';
+                const timePublished = new Date(`${article.time_published.slice(0,4)}-${article.time_published.slice(4,6)}-${article.time_published.slice(6,8)}T${article.time_published.slice(9,11)}:${article.time_published.slice(11,13)}:00Z`);
+                card.innerHTML = `<img src="${article.banner_image || 'https://placehold.co/600x400/EEE/31343C?text=No+Image'}" alt="News Image" onerror="this.onerror=null;this.src='https://placehold.co/600x400/EEE/31343C?text=No+Image';"><h3 class="news-headline"><a href="${article.url}" target="_blank" rel="noopener noreferrer">${article.title}</a></h3><p class="news-summary">${article.summary}</p><div class="news-meta"><strong>Source:</strong> ${article.source} | ${timePublished.toLocaleString()}</div>`;
+                newsFeedContainer.appendChild(card);
+            });
+        }
+        function alignData(dataArrays) {
+            const allDates = new Set();
+            dataArrays.forEach(data => Object.keys(data).forEach(date => allDates.add(date)));
+            const sortedDates = Array.from(allDates).sort((a, b) => new Date(a) - new Date(b));
+            const alignedPrices = dataArrays.map(data => sortedDates.map(date => data[date] ? parseFloat(data[date]['5. adjusted close']) : null));
+            return { alignedPrices, dates: sortedDates };
+        }
+        function calculateDailyReturns(prices) {
+            const returns = [];
+            for (let i = 0; i < prices.length; i++) {
+                returns[i] = [];
+                for (let j = 1; j < prices[i].length; j++) {
+                    if (prices[i][j-1] && prices[i][j]) {
+                        returns[i].push(Math.log(prices[i][j] / prices[i][j-1]));
+                    }
+                }
+            }
+            return returns;
+        }
+        function calculateMeanReturns(returns) {
+            return returns.map(stockReturns => {
+                const sum = stockReturns.reduce((a, b) => a + b, 0);
+                return sum / stockReturns.length;
+            });
+        }
+        function calculateCovarianceMatrix(returns) {
+            const numAssets = returns.length;
+            const numReturns = returns[0].length;
+            const meanReturns = calculateMeanReturns(returns);
+            const covMatrix = Array(numAssets).fill(0).map(() => Array(numAssets).fill(0));
+            for (let i = 0; i < numAssets; i++) {
+                for (let j = 0; j < numAssets; j++) {
+                    let covariance = 0;
+                    for (let k = 0; k < numReturns; k++) {
+                        covariance += (returns[i][k] - meanReturns[i]) * (returns[j][k] - meanReturns[j]);
+                    }
+                    covMatrix[i][j] = covariance / (numReturns - 1);
+                }
+            }
+            return covMatrix;
+        }
+        function runMonteCarloSimulation(meanReturns, covMatrix, numAssets, numSimulations = 5000) {
+            const results = [];
+            const tradingDays = 252;
+            for (let i = 0; i < numSimulations; i++) {
+                let weights = Array.from({length: numAssets}, () => Math.random());
+                const totalWeight = weights.reduce((sum, w) => sum + w, 0);
+                weights = weights.map(w => w / totalWeight);
+                const portfolioReturn = weights.reduce((sum, w, j) => sum + w * meanReturns[j], 0) * tradingDays;
+                let portfolioVariance = 0;
+                for (let j = 0; j < numAssets; j++) {
+                    for (let k = 0; k < numAssets; k++) {
+                        portfolioVariance += weights[j] * weights[k] * covMatrix[j][k];
+                    }
+                }
+                portfolioVariance *= tradingDays;
+                const portfolioStdDev = Math.sqrt(portfolioVariance);
+                results.push({ return: portfolioReturn, volatility: portfolioStdDev, weights: weights });
+            }
+            return results;
+        }
+        function findOptimalPortfolio(simulationResults, goal, riskFreeRate = 0.0) {
+            let optimalPortfolio = null;
+            if (goal === 'maxSharpe') {
+                let maxSharpeRatio = -Infinity;
+                simulationResults.forEach(p => {
+                    const sharpeRatio = (p.return - riskFreeRate) / p.volatility;
+                    if (sharpeRatio > maxSharpeRatio) {
+                        maxSharpeRatio = sharpeRatio;
+                        optimalPortfolio = p;
+                    }
+                });
+            } else if (goal === 'minVolatility') {
+                let minVolatility = Infinity;
+                simulationResults.forEach(p => {
+                    if (p.volatility < minVolatility) {
+                        minVolatility = p.volatility;
+                        optimalPortfolio = p;
+                    }
+                });
+            }
+            return optimalPortfolio;
+        }
+        function displayMetrics(optimalPortfolio, riskFreeRate = 0.0) {
+            metricsContainer.innerHTML = '';
+            const expectedReturn = optimalPortfolio.return;
+            const volatility = optimalPortfolio.volatility;
+            const sharpeRatio = (expectedReturn - riskFreeRate) / volatility;
+            const metrics = [
+                { label: 'Expected Return', value: (expectedReturn * 100).toFixed(2) + '%' },
+                { label: 'Annual Volatility', value: (volatility * 100).toFixed(2) + '%' },
+                { label: 'Sharpe Ratio', value: sharpeRatio.toFixed(2) }
+            ];
+            metrics.forEach(metric => {
+                const card = document.createElement('div');
+                card.className = 'metric-card';
+                card.innerHTML = `<div class="label">${metric.label}</div><div class="value">${metric.value}</div>`;
+                metricsContainer.appendChild(card);
+            });
+        }
+        function displayResults(optimalPortfolio, tickers) {
+            allocationContainer.innerHTML = '';
+            document.querySelector('#results-output h3').textContent = `Optimal Allocation (${optimizationGoalSelect.options[optimizationGoalSelect.selectedIndex].text})`;
+            optimalPortfolio.weights.forEach((weight, i) => {
+                const card = document.createElement('div');
+                card.className = 'allocation-card';
+                card.innerHTML = `<div class="ticker">${tickers[i]}</div><div class="weight">${(weight * 100).toFixed(2)}%</div>`;
+                allocationContainer.appendChild(card);
+            });
+        }
+        function displayChart(simulationResults, optimalPortfolio, goal) {
+            chartPlaceholder.classList.add('hidden');
+            chartCanvas.classList.remove('hidden');
+            const ctx = chartCanvas.getContext('2d');
+            const allPortfoliosData = simulationResults.map(p => ({ x: p.volatility, y: p.return }));
+            const optimalPortfolioData = { x: optimalPortfolio.volatility, y: optimalPortfolio.return };
+            const goalLabel = goal === 'maxSharpe' ? 'Max Sharpe Ratio' : 'Min Volatility';
+            efficientFrontierChart = new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Simulated Portfolios',
+                        data: allPortfoliosData,
+                        backgroundColor: 'rgba(0, 123, 255, 0.3)',
+                        pointRadius: 3
+                    }, {
+                        label: `Optimal Portfolio (${goalLabel})`,
+                        data: [optimalPortfolioData],
+                        backgroundColor: 'rgba(255, 99, 132, 1)',
+                        pointRadius: 7,
+                        pointHoverRadius: 9
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { title: { display: true, text: 'Volatility (Standard Deviation)' }, ticks: { callback: value => (value * 100).toFixed(1) + '%' } },
+                        y: { title: { display: true, text: 'Expected Return' }, ticks: { callback: value => (value * 100).toFixed(1) + '%' } }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.dataset.label || '';
+                                    const ret = (context.parsed.y * 100).toFixed(2) + '%';
+                                    const vol = (context.parsed.x * 100).toFixed(2) + '%';
+                                    return `${label}: (Return: ${ret}, Volatility: ${vol})`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        function toggleLoading(isLoading) {
+            btnText.classList.toggle('hidden', isLoading);
+            loader.classList.toggle('hidden', !isLoading);
+            optimizeBtn.disabled = isLoading;
+        }
+        function displayMessage(text, type) {
+            statusMessageContainer.innerHTML = `<div class="message ${type}">${text}</div>`;
+        }
+        function clearPreviousResults() {
+            allocationContainer.innerHTML = '';
+            metricsContainer.innerHTML = '';
+            statusMessageContainer.innerHTML = '';
+            newsFeedContainer.innerHTML = '<p class="placeholder">News related to your selected tickers will appear here.</p>';
+            chartPlaceholder.classList.remove('hidden');
+            chartCanvas.classList.add('hidden');
+            backtestChartPlaceholder.classList.remove('hidden');
+            backtestChartCanvas.classList.add('hidden');
+            if (efficientFrontierChart) {
+                efficientFrontierChart.destroy();
+                efficientFrontierChart = null;
+            }
+            if (backtestChart) {
+                backtestChart.destroy();
+                backtestChart = null;
+            }
+        }
+    </script>
+</body>
+</html>
